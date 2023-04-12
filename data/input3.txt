@@ -1,0 +1,11 @@
+id,name,age,city
+1,John,23,New York
+2,Jane,35,Los Angeles
+3,Bob,45,Chicago
+4,Alice,28,San Francisco
+5,Mark,52,Seattle
+6,Rose,30,Austin
+7,David,48,Miami
+8,Lucy,21,Boston
+9,Charles,37,Denver
+10,Emma,26,Atlanta
