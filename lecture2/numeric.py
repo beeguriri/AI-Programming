@@ -28,7 +28,8 @@ def create_problem(filename):
 ## > 2. 초기값 생성 -> 유니폼(정규분포) 랜덤
 #### 매개변수는 튜플을 쓰자(immutable)
 def random_init(p):
-    expression, domain = p
+    # expression, domain = p
+    domain = p[1]
     init = []
     for i in range(0, len(domain[0])):
         # 최대 최소 사이의 랜덤값
@@ -48,6 +49,39 @@ def evaluate(state, p):
     return eval(expression) # eval : String type 의 식 // 사용금지(ㅋㅋ)
 
 
+## 출력구문은 따로 빼기
+def describe_problem(p):
+    print()
+    print("Objective function:")
+    print(p[0])
+    print("Search space:")
+    var_names = p[1][0]
+    low = p[1][1]
+    up = p[1][2]
+    for i in range(len(low)):
+        print(f" {var_names[i]} : {low[i], up[i]}")
+
+def display_result(solution, minimum):
+    print()
+    print("Solution found:")
+    print(coordinate(solution))  # Convert list to tuple
+    print("Minimum value: {0:,.3f}".format(minimum))
+    print()
+    print("Total number of evaluations: {0:,}".format(NumEval))
+
+def coordinate(solution):
+    c = [round(value, 3) for value in solution]
+    return tuple(c)
+
+# file entry point
 if __name__ == '__main__':
-    pass
+    # 식과 인자 분리
+    p = create_problem('./data/Convex.txt')
+    # 식과 인자 출력
+    describe_problem(p)
+    # 초기값 결정
+    solution = random_init(p)
+    # 계산
+    minimum = evaluate(solution, p)
+    print(f"{minimum}")
 
