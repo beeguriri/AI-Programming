@@ -48,6 +48,20 @@ def evaluate(state, p):
 
     return eval(expression) # eval : String type 의 식 // 사용금지(ㅋㅋ)
 
+def mutate(current, i, d, p):
+    current_copy = current[:]
+    domain = p[1]
+    low = domain[1][i]
+    up = domain[2][i]
+    if low <= (current_copy[i] + d) <= up:
+        current_copy[i] += d
+    return current_copy
+
+
+def coordinate(solution):
+    c = [round(value, 3) for value in solution]
+    return tuple(c)
+
 
 ## 출력구문은 따로 빼기
 def describe_problem(p):
@@ -60,6 +74,7 @@ def describe_problem(p):
     up = p[1][2]
     for i in range(len(low)):
         print(f" {var_names[i]} : {low[i], up[i]}")
+
 
 def display_result(solution, minimum):
     print()
@@ -83,5 +98,7 @@ if __name__ == '__main__':
     solution = random_init(p)
     # 계산
     minimum = evaluate(solution, p)
-    print(f"{minimum}")
+    # print(f"{minimum}")
+    display_result(solution, minimum)
+
 
